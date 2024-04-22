@@ -1,0 +1,24 @@
+### Note: local MySQL server password maybe "password" instead of "P@ssw0rd12!"
+Use Python to connect and query data in Azure Database for MySQL:
+https://learn.microsoft.com/en-us/azure/mysql/single-server/connect-python
+
+Azure for Python Developers:
+https://learn.microsoft.com/en-us/azure/developer/python/
+
+First Machine Learning Project:
+https://machinelearningmastery.com/machine-learning-in-python-step-by-step/
+
+First AI Project:
+https://becominghuman.ai/write-your-first-ai-project-in-15-minutes-a287ed348e7c
+
+LLaMA & Alpaca: 'ChatGPT' On Your Local Computer:
+https://medium.com/@martin-thissen/llama-alpaca-chatgpt-on-your-local-computer-tutorial-17adda704c23
+
+Apply machine learning models in Azure Functions with Python and TensorFlow:
+https://learn.microsoft.com/en-us/azure/azure-functions/functions-machine-learning-tensorflow?tabs=bash
+
+ProjectPro:
+https://www.projectpro.io/article/microsoft-azure-projects-ideas-for-beginners-for-learning/507
+https://www.projectpro.io/tutorial
+
+
