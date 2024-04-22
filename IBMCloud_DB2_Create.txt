@@ -1,0 +1,15 @@
+# Configure IBM Cloud account (replace with your information)
+$emailAddress = "your_email@example.com"
+$password = "your_password"
+
+# Login to IBM Cloud CLI
+ibmcloud login -r us-south -g Default -u $emailAddress -p $password
+
+# Check login status (optional)
+ibmcloud account info
+
+# Create an IBM Cloud API key (copy the key output)
+ibmcloud iam api-key-create my-api-key
+
+# Logout (optional)
+ibmcloud logout
