@@ -2,3 +2,5 @@ ibmcloud resource group-create <resource-group-name>
 
 ibmcloud resource service-instance-create <service-instance-name> dashdb-for-transactions free <region> -g <resource-group-name>
 
+ibmcloud resource search <service-instance-name>
+
