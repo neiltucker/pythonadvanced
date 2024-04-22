@@ -2,4 +2,3 @@ Activity 7-1:
 Step 2:
 This step will not work if the wwinventory database is missing.  You may recreate it using the create_wwinventory_db.py script in the C:\094022Data\Creating Data-Driven Applications\WWProject-L4 folder from Lesson 4.
 You may use MySQL Workbench to verify that the database was created correctly.
-
