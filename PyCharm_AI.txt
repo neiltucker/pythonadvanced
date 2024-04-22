@@ -1,0 +1,51 @@
+How to Use ChatGPT in Python:
+https://youtu.be/1BjFHn7Zqeo?si=BtcwAgDzDEBAbFZx
+
+File > Settings > Plugins
+
+Cody 
+https://youtu.be/-NnYtfzO7qU?si=SYUkmMTHPmZUqTnb
+
+
+==========
+
+### AI projects for "Advanced Programming Techniques With Python" class:
+
+Beginner:
+1. Interactive Storyteller: 
+    - Use an LLM API (like OpenAI) to generate creative text formats.  
+    - Students write Python code to prompt the LLM with story beginnings and user choices. 
+    - The LLM then continues the story based on the prompts, creating an interactive experience.
+
+2. Code Comment Generator: 
+    	- This project uses an LLM to automatically generate comments for simple Python code snippets. 
+    	- Students implement functions to take code as input, format it, send prompts to the LLM, and integrate the generated comments.
+
+Intermediate:
+1. Sentiment Analysis Assistant: 
+    	- Students build a Python program that analyzes the sentiment of text using an LLM. 
+    	- The LLM can be used to identify positive, negative, or neutral sentiment in tweets, product reviews, or other text data.
+
+2. Question Answering System (Q&A): 
+    	- This project involves creating a system that answers user questions based on a provided dataset (like FAQs).  
+    	- Students utilize an LLM to process the questions and find relevant answers within the dataset.
+
+Advanced:
+1. LLM-powered Chatbot: 
+    	- This is a more complex project where students build a chatbot that interacts with users using an LLM. 
+    	- The LLM is used to understand user queries, formulate responses, and maintain a conversation flow.
+
+2. Multimodal LLM Integration for Creative Content Generation:
+	- Create aan app that utilizes an LLM to generate creative text formats (e.g., poems, scripts) inspired by a user-provided image or music piece
+	- Explore libraries like Transformers or LLMs specifically designed for multimodal processing. (e.g., CLIP from OpenAI)
+	- The LLM generates creative text content inspired by the image/music and the textual prompts
+
+
+Lesson 3 - Activity 3-5 (Optional):
+	- Integrate an LLM with a GUI framework like Tkinter or PyQt to create user-friendly applications for any of the projects above.
+
+Tips:
+*  Use only freely available LLM APIs with good documentation.
+*  Focus on understanding the core functionalities of LLMs within the chosen project.
+*  Projects can be scaled based on complexity; for example, a basic chatbot might start with simple greetings and progress to more complex interactions.
+
