@@ -1,0 +1,48 @@
+### Use Linear Regression in Python with SQL Server database as source
+### Requires AdventureWorks2019 database running on SQL Server
+
+import pyodbc
+import pandas as pd
+
+# establish a database connection
+conndb_string = "Driver={SQL Server}; Server=DESKTOP-QNHJ5Q7\SQLEXPRESS; Database=AdventureWorks2019; Trusted_Connection=yes;"
+conndb = pyodbc.connect(conn_string)
+
+# create a new DataFrame from a SQL query
+engine = sqlalchemy.create_engine('mssql+pyodbc:///?odbc_connect={}'.format(conndb_string))
+df = pd.read_sql_query('''
+    SELECT h.TotalDue, d.OrderQty
+    FROM Sales.SalesOrderHeader h
+    JOIN Sales.SalesOrderDetail d ON h.SalesOrderID = d.SalesOrderID
+''', engine)
+
+conndb.close()
+
+from scipy.stats import linregress
+
+# perform linear regression
+slope, intercept, r_value, p_value, std_err = linregress(df['OrderQty'], df['TotalDue'])
+
+print(f'Slope: {slope}')
+print(f'Intercept: {intercept}')
+print(f'R-squared: {r_value**2}')
+
+
+import matplotlib.pyplot as plt
+
+# create a scatter plot of the data
+plt.scatter(df['OrderQty'], df['TotalDue'])
+
+# create a range of x values from the minimum to the maximum x value
+x_values = range(int(df['OrderQty'].min()), int(df['OrderQty'].max()))
+
+# calculate the corresponding y values for the regression line
+y_values = [slope*x + intercept for x in x_values]
+
+# plot the regression line
+plt.plot(x_values, y_values, color='red')
+
+plt.title('Linear Regression of TotalDue on OrderQty')
+plt.xlabel('OrderQty')
+plt.ylabel('TotalDue')
+plt.show()

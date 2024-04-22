@@ -1,0 +1,7 @@
+Activity 4-2:
+Step 4b:
+Make sure auto increment in the script has an underscore (AUTO_INCREMENT)
+Everything in the script must be formatted exactly as shown in the example displayed in the activity.
+
+
+

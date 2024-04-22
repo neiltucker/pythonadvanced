@@ -1,0 +1,22 @@
+### Use Pyinstaller to create pyton executable
+### pip install pyinstaller
+
+/* myname.py script
+import os
+os.system("cls")
+myname = input("What is your name: ")
+mylocation = input("Where do you live: ")
+print(f"Hello {myname} from {mylocation}.  Have a good day!")
+*/
+
+python myname.py
+pyinstaller --onefile myname.py
+
+./dist/myname.exe
+
+
+
+
+
+
+

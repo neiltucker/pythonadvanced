@@ -1,0 +1,24 @@
+### Record events using Python and Windows Logging 
+
+import os
+import logging
+import win32evtlogutil
+import time
+
+# Python Logging
+logging.basicConfig(filename="c:\\temp\\python.log", level=os.environ.get("LOGLEVEL", "INFO"))
+logging.info("Date: {0:s}".format(time.strftime("%Y-%m-%d %H:%M:%S")))
+time.sleep(2)
+logging.warning("Date: {0:s}".format(time.strftime("%Y-%m-%d %H:%M:%S")))
+time.sleep(2)
+logging.error("Date: {0:s}".format(time.strftime("%Y-%m-%d %H:%M:%S")))
+
+# Windows Logging
+EVENTTIME = "Current time: {0:s}".format(time.strftime("%Y-%m-%d %H:%M:%S"))
+EVENTTYPE = "Python Scripting Event"
+EVENTID = 7040  
+EVENTCATEGORY = 9876
+EVENTMESSAGE = ["Python scripting event.  Informational message"]
+win32evtlogutil.ReportEvent(EVENTTYPE, EVENTID, strings=EVENTMESSAGE, data=EVENTTIME.encode("ascii"))
+
+# Event Viewer > Windows Logs > Application

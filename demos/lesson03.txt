@@ -1,0 +1,48 @@
+###  Make sure pip is installed properly before proceeding
+###  draw.io or diagrams.net can be used to create wireframes
+###  Create a GUI app with Tkinter: https://www.youtube.com/watch?v=itRLRfuL_PQ
+###  GooeyPie is built on top of Tkinter: pip install gooeypie
+###  Use pelican and Markdown to create static websites
+
+import tkinter as tk, random, time
+
+class Application(tk.Frame):
+   def __init__(self, master):
+      super(Application, self).__init__(master)
+
+# Declare a new window
+window1 = tk.Tk()
+window1.geometry("400x400")
+window1.title("Python App")
+window1.configure(bg='lightblue')
+button1 = tk.Button(window1,text="Exit", command = window1.destroy)
+button1.pack()
+button1.place(x=350,y=350)
+
+# Random Date Selection
+def random_date():
+    time_format = "%Y/%m/%d"
+    stime = time.mktime(time.strptime("2000/01/01", time_format))
+    etime = time.mktime(time.strptime("2022/12/31", time_format))
+    ptime = stime + random.random() * (etime - stime)
+    return time.strftime(time_format, time.localtime(ptime))
+
+
+random_date()
+
+
+
+# DISPLAY DATE
+def random_display():
+    result = random_date()
+    results_display = tk.Text(master=window1, height=5, width=25)
+    results_display.grid(column=0, row=3)
+    results_display.insert(tk.END, result)
+
+# RANDOMIZER BUTTON
+button = tk.Button(text="Randomizer", command=random_display)
+button.grid(column=0, row=1)
+
+# Listen for events
+app = Application(window1)
+app.mainloop()

@@ -1,0 +1,48 @@
+###  Make sure pip is installed properly before proceeding
+
+class Car:
+   def __init__(self, make, model,miles,gallons):
+      self.make = make
+      self.model = model
+      self.miles = miles
+      self.gallons = gallons
+
+class Sedan(Car):
+   def __init__(self, make, model, miles, gallons, doors, seats):
+      super(Sedan, self).__init__(make, model, miles, gallons)
+      self.doors = doors
+      self.seats = seats
+
+car1 = Sedan("Tesla", "Model T", 500, 50, 4, 5)
+vars(car1)
+
+===   
+
+class CarB:
+   @classmethod
+   def calcMPG(cls, miles=1000, gallons=20):
+      return miles / gallons
+
+car2 = CarB()
+car2.calcMPG()
+
+===   
+
+class Car:
+   def factory(type):
+      class Sedan(Car):
+         def display(self):
+            print("This car is a sedan")
+      class Sports(Car):
+         def display(self):
+            print("This car is a sports car")
+      if (type == "Sedan"):
+         return Sedan()
+      if (type == "Sports"):
+         return Sports()
+
+car1 = Car.factory("Sedan")
+car1.display()
+type(car1)
+
+

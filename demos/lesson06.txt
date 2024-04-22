@@ -1,0 +1,122 @@
+### orderdata.csv file is included in the repository
+### pip install lxml or os.system('pip install lxml')
+### Many of these commands are data cleaning tasks
+### pip install --upgrade pandas matplotlib lxml
+
+import lxml, pyodbc, numpy as np, pandas as pd, matplotlib.pyplot as plt
+list1 = [1,2,3,4,5,6,7,8,9,10]
+array1 = np.array(list1)
+
+dir(list1)
+dir(array1)
+
+len(dir(list1))
+len(dir(array1))
+
+
+==========   
+dir(pd)
+orders = pd.read_csv('orderdata.csv')
+orders.info()
+orders.shape
+orders
+orders.head(20)
+orders.dtypes
+dir(orders)
+len(dir(orders))
+pd.set_option('display.max_rows', 100)
+
+# Add new column
+orders["Total"] = orders["Quantity"] * orders["Price"] + orders["Freight"]
+orders.head(10)
+
+# Modify existing column
+orders["Freight"] = round(orders["Freight"] / 2)
+orders.head(10)
+orders["Total"] = orders["Quantity"] * orders["Price"] + orders["Freight"]
+orders.head(10)
+
+# Remove column
+orders = orders.drop(columns=['OrderDate'])
+orders.head(10)
+
+# Sort by column
+orders = orders.sort_values(by=['Total'], ascending=False)
+orders
+
+# Reorder columns
+orders = orders.iloc[:,[0,1,2,3,4,5,7,6]]
+orders
+
+# Rename column
+orders = orders.rename(columns={"ManagerID":"EmployeeID"})
+orders
+
+# Remove rows
+orders = orders.drop(range(5000,10000))
+orders
+
+# Filter results
+orders.query('Total > 5000')
+lowprices = orders.query('Price < 25').copy()
+type(lowprices)
+
+### Save results
+orders.to_csv('orderdata_clean.csv')
+orders.to_xml('orderdata_clean.xml')
+orders.to_html('orderdata_clean.html')
+orders.to_parquet('orderdata_clean.parquet')
+orders.to_pickle('orderdata_clean.pickle')
+
+
+========== 
+import matplotlib.pyplot as plt
+
+# Test Plot for Sales Figures
+x = [2011,2012,2013,2014,2015,2016,2017,2018,2019,2020]
+y = [15000,18000,17000,17500,42000,32000,39000,89000,121000,289000]
+plt.title("Yearly Sales")
+plt.xlabel('Years')
+plt.ylabel('Sales')
+plt.plot(x,y)
+plt.show()
+plt.bar(x,y)
+plt.show()
+
+
+==========   
+import pyodbc, pandas as pd
+import sqlalchemy
+customer_data = pd.read_csv('customerdata.csv')
+customer_data
+
+### Local SQL Server
+conn_string = "Driver={SQL Server}; Server=DESKTOP-QNHJ5Q7\SQLEXPRESS; Trusted_Connection=yes;"
+connsrv = pyodbc.connect(conn_string)
+connsrv.autocommit = True
+cursorsrv = connsrv.cursor()
+sql = "CREATE DATABASE db1"
+cursorsrv.execute(sql)
+cursorsrv.close()
+connsrv.commit()
+connsrv.close()
+
+conndb_string = "Driver={SQL Server}; Server=DESKTOP-QNHJ5Q7\SQLEXPRESS; Trusted_Connection=yes; Database=db1;"
+engine = sqlalchemy.create_engine('mssql+pyodbc:///?odbc_connect={}'.format(conndb_string), use_setinputsizes=False)
+customer_data.to_sql('sample_customers',schema='dbo',con=engine)
+
+### Azure SQL Database
+conn_string = "Driver={SQL Server}; Server=<azure sql database>.database.windows.net; UID=<user id>; PWD=<password>; Trusted_Connection=no;"
+connsrv = pyodbc.connect(conn_string)
+connsrv.autocommit = True
+cursorsrv = connsrv.cursor()
+sql = "CREATE DATABASE db2"
+cursorsrv.execute(sql)
+cursorsrv.close()
+connsrv.commit()
+connsrv.close()
+
+conn_string = "Driver={SQL Server}; Server=<azure sql database>.database.windows.net; UID=<user id>; PWD=<password>; Trusted_Connection=no; Database=db2;"
+engine = sqlalchemy.create_engine('mssql+pyodbc:///?odbc_connect={}'.format(conndb_string), use_setinputsizes=False)
+customer_data.to_sql('sample_customers',schema='dbo',con=engine)
+

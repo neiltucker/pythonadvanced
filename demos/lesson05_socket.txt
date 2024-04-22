@@ -1,0 +1,35 @@
+### Socket client / server connection
+
+# Server
+import socket, json
+host = socket.gethostname()
+port = 65000
+
+with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+    s.bind((host,port))
+    s.listen()
+    conn, addr = s.accept()
+    with conn:
+        print(f"Connected by {addr}")
+        while True:
+            data = conn.recv(1024)
+            if not data:
+                break
+            conn.sendall(data)
+
+
+# Client
+import socket, json
+host = socket.gethostname()
+port = 65000
+
+with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as c:
+    c.connect((host,port))
+    c.sendall(b"Hello, world")
+    data = c.recv(1024)
+
+print(f"Received {data!r}")
+
+
+
+

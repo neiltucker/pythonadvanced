@@ -1,0 +1,35 @@
+### Make sure pip is installed properly before proceeding
+### pip install pandas
+### pip install seaborn
+### pip install mysql-connector
+### pip install jupyterlab (jupyter-lab)
+### pip install azure==4.0.0
+
+### Use pelican to create static websites
+
+class Car:
+   def __init__(self, make, model):
+      self.make = make
+      self.model = model
+
+car1 = Car("Ford","Mustang")
+car1.make
+car1.model
+
+
+class Sedan(Car):
+   def __init__(self, make, model, doors, seats):
+      super(Sedan, self).__init__(make, model)
+      self.doors = doors
+      self.seats = seats
+
+car2 = Sedan("Tesla", "Model T", 4, 5)
+car2.make
+car2.seats
+
+
+
+
+
+
+

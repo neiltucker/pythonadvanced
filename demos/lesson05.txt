@@ -1,0 +1,46 @@
+### Python Repo: https://github.com/neiltucker/python_tutorial
+### python -m pip install requests
+### pip install --upgrade mysql-connector-python
+### pip install --upgrade flask
+### pip install --upgrade flask_restful
+### pip install --upgrade flask-httpauth
+### download customerdata.csv and orderdata.csv
+### Two terminal windows for demonstration (Server / Client)
+
+### Server
+import socket
+server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+host = 'localhost'
+port = 8888
+server.bind((host, port))
+# Allow a maximum of 10 connection(s)
+server.listen(10)
+# Wait for the connection and display client information
+client, addr = server.accept()
+print("Client connection from:", str(addr))
+# Receive up to 10KB of data
+client.recv(10240)
+
+### Client
+import socket
+server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+host = socket.gethostbyname("localhost")
+port = 8888
+server.connect((host, port))
+# Send data to the server
+data = "Hello Server!"
+server.send(data.encode())
+# Wait for a reply from the server
+server.recv(1024)
+
+### Server
+# After successful connection, send message to the client
+data = "Hello Client!"
+client.send(data.encode())
+
+client.close()
+
+
+
+
+

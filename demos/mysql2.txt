@@ -1,0 +1,46 @@
+### Python Repo: https://github.com/neiltucker/python_tutorial
+### INSERT DATA INTO DATABASE TABLE
+### python -m pip install requests
+### download customerdata.csv and orderdata.csv
+
+import pandas as pd, mysql.connector
+
+customer_data = pd.read_csv('customerdata.csv')
+# print(customer_data)
+# orders_data = pd.read_csv('orderdata.csv')
+
+# Connect to MySQL connector.
+import mysql.connector
+connsrv = mysql.connector.connect(
+    host="mysql202204.ccfdrvwpyoj1.us-east-1.rds.amazonaws.com",
+    user="sqllogin1",
+    password="Password1")
+
+cursorsrv = connsrv.cursor()
+cursorsrv.execute("create database db01")
+cursorsrv.close()
+connsrv.commit()
+
+conndb = mysql.connector.connect(
+    host="mysql202204.ccfdrvwpyoj1.us-east-1.rds.amazonaws.com",
+    user="sqllogin1",
+    password="Password1",
+    database="db01")
+
+cursordb = conndb.cursor()
+sql = "CREATE TABLE sample_customer(CustomerID VARCHAR(100), FirstName VARCHAR(100), LastName VARCHAR(100), Phone VARCHAR(100), Street VARCHAR(100), City VARCHAR(100), State VARCHAR(100))"
+cursordb.execute(sql) 
+
+for row in customer_data.itertuples():
+    print( (row.CustomerID, row.FirstName, row.LastName, row.Phone, row.Street, row.City, row.State))
+    cursordb.execute("INSERT INTO sample_customer (CustomerID, FirstName, LastName, Phone, Street, City, State) VALUES (%s,%s,%s,%s,%s,%s,%s)", 
+                    (row.CustomerID, row.FirstName, row.LastName, row.Phone, row.Street, row.City, row.State))
+
+cursordb.execute("SELECT * FROM sample_customer")
+query1 = cursordb.fetchall()
+cursordb.close()
+conndb.commit()
+
+type(query1)
+query1[0]
+query1[-1]

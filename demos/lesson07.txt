@@ -1,0 +1,17 @@
+# python -m pip install pandas numpy
+# Capture numbers to be divided.
+
+# num = input( 'Enter the number to be divided: ')
+# denom = input( 'Enter the number to divided by: ')
+
+num = int(input( 'Enter the number to be divided: '))
+denom = int(input( 'Enter the number to divided by: '))
+
+# Perform division operation
+# quo = num / denom
+quo =  float(num) /  float(denom)
+
+# Print the output 
+print( 'The quotient of {0} divided by {1} is: {2}'.format(num , denom , quo))
+
+

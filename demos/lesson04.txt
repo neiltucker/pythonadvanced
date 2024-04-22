@@ -1,0 +1,131 @@
+### Creating data-driven applications
+### DynamoDB: https://www.cdata.com/kb/tech/dynamodb-python-pandas.rst
+### Make sure pip is installed properly before proceeding
+### python -m pip install requests
+### pip install --upgrade pandas numpy
+### pip install --upgrade seaborn
+### pip install --upgrade jupyterlab (jupyter-lab)
+### pip install --upgrade mysql-connector-python
+### download customerdata.csv and orderdata.csv
+
+### mysql -h localhost -u root -ppassword 
+### MySQL 8.0 Command Line Client (password = password)
+
+
+import os
+os.path.isdir("c:/tmp")
+os.getcwd()
+os.listdir("c:/tmp")
+os.path.isfile("datafile.txt")
+
+names_file = open("datafile.txt", "w")
+names_file.write("John,Brown,33\n")
+names_file.write("Matthew,Patterson,29\n")
+names_file.write("William,Johnson,22\n")
+names_file.close()
+
+names_file = open("datafile.txt", "r")
+names = names_file.read()
+names_file.close()
+
+
+import pandas as pd, mysql.connector
+
+customer_data = pd.read_csv('customerdata.csv')
+print(customer_data)
+orders_data = pd.read_csv('orderdata.csv')
+print(orders_data)
+
+# Connect to MySQL server and create new database
+conn_mysql = mysql.connector.connect(
+      host="localhost",
+      user="root",
+      password="password")
+
+cursor = conn_mysql.cursor()
+cursor.execute ( "CREATE DATABASE db1" )
+
+cursor.close()
+conn_mysql.commit()
+conn_mysql.close()
+
+
+# Connect to MySQL server database and create / update / query a table
+conn_db = mysql.connector.connect(
+	host="localhost",
+	user="root",
+	password="password",
+	database="db1")
+
+cursor = conn_db.cursor()
+sql_create_table = "CREATE TABLE sample_customer(CustomerID VARCHAR(100), FirstName VARCHAR(100), LastName VARCHAR(100), Phone VARCHAR(100), Street VARCHAR(100), City VARCHAR(100), State VARCHAR(100))"
+sql_query_table = "SELECT * FROM sample_customer;" 
+cursor.execute(sql_create_table)
+
+for row in customer_data.itertuples():
+    print( (row.CustomerID, row.FirstName, row.LastName, row.Phone, row.Street, row.City, row.State))
+    cursor.execute("INSERT INTO sample_customer (CustomerID, FirstName, LastName, Phone, Street, City, State) VALUES (%s,%s,%s,%s,%s,%s,%s)", 
+                    (row.CustomerID, row.FirstName, row.LastName, row.Phone, row.Street, row.City, row.State))
+
+cursor.execute(sql_query_table) 
+cursor.fetchall()
+cursor.close()
+conn_db.commit()
+conn_db.close()
+
+==========  
+
+import pandas as pd, mysql.connector
+
+customer_data = pd.read_csv('customerdata.csv')
+print(customer_data)
+orders_data = pd.read_csv('orderdata.csv')
+print(orders_data)
+
+conn_mysql = mysql.connector.connect(
+host="nrtmysql.mysql.database.azure.com",
+user="sqllogin1",
+password="Password1234!")
+
+cursor = conn_mysql.cursor()
+cursor.execute ( "CREATE DATABASE db1" )
+
+cursor.close()
+conn_mysql.commit()
+conn_mysql.close()
+
+conn_db = mysql.connector.connect(
+host="nrtmysql.mysql.database.azure.com",
+user="sqllogin1",
+password="Password1234!",
+database="db1")
+
+cursor = conn_db.cursor()
+sql_create_table = "CREATE TABLE sample_customer(CustomerID VARCHAR(100), FirstName VARCHAR(100), LastName VARCHAR(100), Phone VARCHAR(100), Street VARCHAR(100), City VARCHAR(100), State VARCHAR(100))"
+sql_query_table = "SELECT * FROM sample_customer;" 
+cursor.execute(sql_create_table)
+
+for row in customer_data.itertuples():
+    print( (row.CustomerID, row.FirstName, row.LastName, row.Phone, row.Street, row.City, row.State))
+    cursor.execute("INSERT INTO sample_customer (CustomerID, FirstName, LastName, Phone, Street, City, State) VALUES (%s,%s,%s,%s,%s,%s,%s)", 
+                    (row.CustomerID, row.FirstName, row.LastName, row.Phone, row.Street, row.City, row.State))
+
+cursor.execute(sql_query_table) 
+cursor.fetchall()
+cursor.close()
+conn_db.commit()
+conn_db.close()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
